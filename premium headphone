@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHER Audio // Premium Standalone 3D Cyber-Headphones</title>
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* ==========================================================================
+           AETHER AUDIO DESIGN SYSTEM & BASE STYLES
+           ========================================================================== */
+        :root {
+            /* Color Palette */
+            --bg-base: #080a0f;
+            --bg-surface: rgba(16, 20, 30, 0.45);
+            --bg-surface-solid: #10141e;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(255, 255, 255, 0.15);
+            
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            
+            /* Neon Accents */
+            --accent-cyan: #00f0ff;
+            --accent-cyan-glow: rgba(0, 240, 255, 0.35);
+            --accent-purple: #bd00ff;
+            --accent-purple-glow: rgba(189, 0, 255, 0.35);
+            --accent-emerald: #00ff66;
+            --accent-emerald-glow: rgba(0, 255, 102, 0.35);
+            --accent-ruby: #ff0055;
+            --accent-ruby-glow: rgba(255, 0, 85, 0.35);
+            
+            /* Active state placeholder */
+            --accent-active: var(--accent-cyan);
+            --accent-active-glow: var(--accent-cyan-glow);
+            /* Fonts */
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            
+            /* Borders & Radius */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-circle: 50%;
+            
+            /* Shadows & Glass */
+            --glass-blur: blur(16px);
+            --shadow-premium: 0 20px 50px rgba(0, 0, 0, 0.5);
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-fast: all 0.2s ease;
+        }
+        /* Base Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(189, 0, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+        /* Scrollbar Customization */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-surface-solid);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+        /* Typography Utility */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        button {
+            background: none;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
+            outline: none;
+        }
+        /* Glassmorphism Panel helper */
+        .glass {
+            background: var(--bg-surface);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-premium);
+            transition: var(--transition-smooth);
+        }
+        .glass:hover {
+            border-color: var(--border-glow);
+        }
+        /* Loader Styles */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-base);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .loader-content {
+            text-align: center;
+        }
+        .loader-logo {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5em;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        .loader-ring {
+            width: 80px;
+            height: 80px;
+            border: 2px dashed rgba(0, 240, 255, 0.2);
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto 2rem auto;
+            animation: rotate 10s linear infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .loader-core {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite alternate;
+        }
+        .loader-status {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .loader-percentage {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px var(--accent-cyan-glow);
+        }
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 1.5rem;
+            left: 5%;
+            width: 90%;
+            height: 4.5rem;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-radius: var(--radius-md);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+        .logo-icon {
+            color: var(--accent-active);
+            filter: drop-shadow(0 0 8px var(--accent-active-glow));
+            transition: var(--transition-smooth);
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .nav-links a {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            font-weight: 500;
+            position: relative;
+            padding: 0.25rem 0;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-active);
+            box-shadow: 0 0 8px var(--accent-active-glow);
+            transition: var(--transition-fast);
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .icon-btn {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: var(--radius-sm);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-primary);
+            position: relative;
+        }
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent-active);
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: 800;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 8px var(--accent-active-glow);
+            transition: var(--transition-smooth);
+        }
+        /* Layout Core */
+        .main-content {
+            padding-top: 8rem;
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 90%;
+        }
+        .section {
+            padding: 2rem 0 4rem 0;
+            min-height: calc(100vh - 8rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 320px 1fr 340px;
+            gap: 2rem;
+            align-items: stretch;
+        }
+        @media (max-width: 1200px) {
+            .grid-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .canvas-container {
+                grid-column: 1 / -1;
+                height: 500px;
+                order: -1;
+            }
+        }
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .navbar {
+                padding: 0 1rem;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+        .panel {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        /* Hero Title Panel */
+        .product-info {
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .tag {
+            align-self: flex-start;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.85rem;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--accent-active);
+            text-shadow: 0 0 5px var(--accent-active-glow);
+        }
+        .product-title {
+            font-size: 3rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 40%, var(--accent-active) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .product-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .mini-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin: 1rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 0;
+        }
+        .mini-spec-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .mini-spec-item i {
+            color: var(--accent-active);
+            filter: drop-shadow(0 0 5px var(--accent-active-glow));
+        }
+        .mini-spec-item .label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+        .mini-spec-item .value {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .pricing-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .price-wrapper {
+            font-family: var(--font-display);
+            font-weight: 700;
+            display: flex;
+            align-items: flex-start;
+        }
+        .price-wrapper .currency {
+            font-size: 1.5rem;
+            margin-top: 0.25rem;
+            color: var(--text-secondary);
+        }
+        .price-wrapper .price {
+            font-size: 3.5rem;
+            line-height: 1;
+            color: var(--text-primary);
+        }
+        .price-wrapper .cents {
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+            color: var(--text-secondary);
+        }
+        /* Button Premium styling */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: var(--transition-smooth);
+        }
+        .btn-primary {
+            background: var(--accent-active);
+            color: #000;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #fff;
+            z-index: -1;
+            transition: var(--transition-smooth);
+        }
+        .btn-primary:hover {
+            color: #000;
+            box-shadow: 0 0 25px var(--accent-active-glow);
+            transform: translateY(-2px);
+        }
+        .btn-primary:hover::before {
+            width: 100%;
+        }
+        .btn-glow {
+            box-shadow: 0 0 15px var(--accent-active-glow);
+        }
+        .btn-block {
+            width: 100%;
+        }
+        /* 3D Canvas Panel */
+        .canvas-container {
+            position: relative;
+            padding: 0;
+            overflow: hidden;
+            min-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #canvas-3d-target {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            outline: none;
+        }
+        .canvas-controls {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 10;
+        }
+        .glass-control-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: var(--radius-sm);
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition-fast);
+        }
+        .glass-control-btn:hover {
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .glass-control-btn.active {
+            color: var(--accent-active);
+            border-color: var(--accent-active);
+            box-shadow: 0 0 10px var(--accent-active-glow);
+        }
+        .canvas-hint {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .canvas-hint i {
+            animation: pulse 1.5s infinite alternate;
+        }
+        /* Customizer Panel */
+        .customizer-controls {
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .section-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .section-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        .customizer-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.25rem;
+        }
+        .customizer-group:last-of-type {
+            border-bottom: none;
+        }
+        .group-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+        .group-title {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+        .selected-value {
+            color: var(--accent-active);
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+        /* Finish selector options */
+        .finish-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+        .finish-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 0.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            transition: var(--transition-fast);
+            background: rgba(255, 255, 255, 0.01);
+        }
+        .finish-btn:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+        }
+        .finish-btn.active {
+            border-color: var(--accent-active);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.05);
+        }
+        .finish-preview {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .metallic-preview {
+            background: linear-gradient(135deg, #a1a1aa 0%, #3f3f46 100%);
+        }
+        .matte-preview {
+            background: #27272a;
+        }
+        .cyberpunk-preview {
+            background: repeating-linear-gradient(45deg, #18181b, #18181b 4px, #3f3f46 4px, #3f3f46 8px);
+        }
+        /* Color swatch lists */
+        .color-swatches {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .swatch {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            padding: 2px;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+        .swatch-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: block;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+        }
+        .swatch:hover {
+            transform: scale(1.1);
+        }
+        .swatch.active {
+            border-color: var(--accent-active);
+            box-shadow: 0 0 10px var(--accent-active-glow);
+        }
+        /* Specs Section Styling */
+        .specs-section {
+            margin-top: 6rem;
+            margin-bottom: 4rem;
+        }
+        .glass-section {
+            background: rgba(16, 20, 30, 0.25);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .section-header {
+            margin-bottom: 3.5rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .section-subtitle-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+        .spec-card {
+            padding: 2.5rem 2rem;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .spec-icon-wrapper {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--accent-active);
+            transition: var(--transition-smooth);
+        }
+        .spec-card:hover .spec-icon-wrapper {
+            background: var(--accent-active);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent-active-glow);
+            transform: translateY(-2px);
+        }
+        .spec-card h3 {
+            font-size: 1.25rem;
+        }
+        .spec-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        /* Accessory Catalog Section */
+        .catalog-section {
+            margin-top: 4rem;
+            margin-bottom: 6rem;
+        }
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .catalog-card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-img-wrapper {
+            height: 200px;
+            background: rgba(255, 255, 255, 0.01);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            padding: 1.5rem;
+        }
+        .accessory-svg {
+            width: auto;
+            height: 80px;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+            transition: var(--transition-smooth);
+        }
+        .catalog-card:hover .accessory-svg {
+            transform: scale(1.15) rotate(5deg);
+        }
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            flex-grow: 1;
+        }
+        .card-title {
+            font-size: 1.15rem;
+        }
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+        }
+        .card-price {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        .card-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-primary);
+            transition: var(--transition-fast);
+        }
+        .card-btn:hover {
+            background: var(--accent-active);
+            color: #000;
+            border-color: var(--accent-active);
+            box-shadow: 0 0 10px var(--accent-active-glow);
+        }
+        /* Cart Overlay & Sidebar */
+        .cart-overlay-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .cart-overlay-container.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .cart-panel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 420px;
+            height: 100%;
+            border-radius: 0;
+            border-left: 1px solid var(--border-color);
+            border-top: none;
+            border-bottom: none;
+            border-right: none;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .cart-overlay-container.open .cart-panel {
+            transform: translateX(0);
+        }
+        @media (max-width: 480px) {
+            .cart-panel {
+                width: 100%;
+            }
+        }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+        .close-btn {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+        }
+        .close-btn:hover {
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .cart-items-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .empty-cart-message {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 4rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .empty-cart-message i {
+            width: 3rem;
+            height: 3rem;
+            opacity: 0.5;
+        }
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding-bottom: 1.25rem;
+        }
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.25rem;
+        }
+        .cart-item-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .cart-item-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .cart-item-specs {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: capitalize;
+        }
+        .cart-item-price {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        .cart-item-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+        .qty-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .qty-btn {
+            width: 1.75rem;
+            height: 1.75rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            transition: var(--transition-fast);
+        }
+        .qty-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+        .qty-val {
+            width: 1.75rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .item-delete-btn {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: var(--transition-fast);
+        }
+        .item-delete-btn:hover {
+            color: var(--accent-ruby);
+        }
+        .cart-summary {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .summary-line.total-line {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .accent-color {
+            color: var(--accent-active);
+        }
+        /* Checkout Modal Container */
+        .checkout-modal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 3000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        .checkout-modal-container.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .checkout-box {
+            width: 1000px;
+            max-width: 100%;
+            position: relative;
+            padding: 3rem;
+        }
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+        }
+        @media (max-width: 900px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+            .checkout-box {
+                padding: 2rem;
+            }
+            .checkout-modal-container {
+                align-items: flex-start;
+            }
+        }
+        .checkout-form-panel h2,
+        .checkout-form-panel h3 {
+            margin-bottom: 1.5rem;
+        }
+        .form-subtitle {
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            font-size: 1.15rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .form-group label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+        .form-group input {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 0.85rem 1rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: var(--transition-fast);
+        }
+        .form-group input:focus {
+            border-color: var(--accent-active);
+            box-shadow: 0 0 10px var(--accent-active-glow);
+            background: rgba(255, 255, 255, 0.05);
+            outline: none;
+        }
+        .submit-btn {
+            margin-top: 1.5rem;
+        }
+        /* Card Visual Mockup */
+        .checkout-preview-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+        .credit-card-wrapper {
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+        }
+        .credit-card {
+            width: 320px;
+            height: 190px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            position: relative;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .card-glow {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--accent-active-glow) 0%, transparent 70%);
+            top: -50px;
+            right: -50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .card-chip {
+            width: 40px;
+            height: 30px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 4px;
+            position: relative;
+            z-index: 1;
+        }
+        .card-logo {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.6);
+            z-index: 1;
+        }
+        .card-number-display {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            z-index: 1;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 1;
+        }
+        .card-label {
+            font-size: 0.55rem;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 0.15rem;
+        }
+        .card-value-display {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .checkout-order-summary {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .summary-items {
+            max-height: 180px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .summary-item-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .summary-divider {
+            border-top: 1px solid var(--border-color);
+        }
+        .summary-total-line {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+        }
+        /* Success Modal Container */
+        .success-modal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(16px);
+            z-index: 4000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .success-modal-container.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .success-box {
+            width: 500px;
+            max-width: 90%;
+            padding: 3.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .success-icon-wrapper {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid var(--accent-emerald);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+        }
+        .success-check-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            color: var(--accent-emerald);
+        }
+        .receipt-box {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            border-radius: var(--radius-sm);
+            text-align: left;
+        }
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+        .receipt-row .label {
+            color: var(--text-secondary);
+        }
+        .receipt-row .value {
+            font-weight: 600;
+        }
+        .code-font {
+            font-family: var(--font-display);
+            letter-spacing: 0.05em;
+            color: var(--accent-active);
+        }
+        .total-receipt-row {
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.75rem;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        /* Footer Section */
+        .footer {
+            padding: 4rem 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 6rem;
+            background: rgba(0,0,0,0.2);
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+        .system-status-ok {
+            color: var(--accent-emerald);
+            font-weight: 700;
+            text-shadow: 0 0 5px var(--accent-emerald-glow);
+        }
+        /* Keyframes & Animations */
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        }
+        .animate-fade-in-right {
+            animation: fadeInRight 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        /* Product color glow helpers */
+        .earcup-glow { box-shadow: 0 0 15px var(--accent-active-glow); }
+        .headband-glow { box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); }
+        .led-glow { box-shadow: 0 0 15px var(--accent-active-glow); }
+        
+        .animate-spin {
+            animation: rotate 1s linear infinite;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Loader Screen -->
+    <div id="loader" class="loader-container">
+        <div class="loader-content">
+            <div class="loader-logo">A E T H E R</div>
+            <div class="loader-ring">
+                <div class="loader-core"></div>
+            </div>
+            <div class="loader-status">Initializing Neural Interface...</div>
+            <div class="loader-percentage">0%</div>
+        </div>
+    </div>
+    <!-- Header / Navbar -->
+    <header class="navbar glass">
+        <div class="logo">
+            <span class="logo-icon">▲</span>
+            <span class="logo-text">AETHER</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#customizer-section" class="active">Customizer</a>
+            <a href="#specs-section">Specs</a>
+            <a href="#catalog-section">Accessories</a>
+        </nav>
+        <div class="nav-actions">
+            <button id="cart-btn" class="icon-btn glass" aria-label="Open Shopping Cart">
+                <i data-lucide="shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </button>
+        </div>
+    </header>
+    <!-- Main Container -->
+    <main class="main-content">
+        <!-- Hero & Customizer Section -->
+        <section id="customizer-section" class="section hero-section">
+            <div class="grid-container">
+                <!-- Column 1: Info & Pricing -->
+                <div class="panel product-info glass animate-fade-in">
+                    <div class="tag">Flagship Series</div>
+                    <h1 class="product-title">Aether VR-1</h1>
+                    <p class="product-description">
+                        Immerse yourself in pure cybernetic sound. Featuring graphene driver technology, adaptive spatial ANC, and real-time biometric haptic sync.
+                    </p>
+                    
+                    <!-- Tech Specs Quick View -->
+                    <div class="mini-specs">
+                        <div class="mini-spec-item">
+                            <i data-lucide="zap"></i>
+                            <div>
+                                <span class="label">Latency</span>
+                                <span class="value">12ms Ultra-Low</span>
+                            </div>
+                        </div>
+                        <div class="mini-spec-item">
+                            <i data-lucide="battery-charging"></i>
+                            <div>
+                                <span class="label">Battery</span>
+                                <span class="value">48 Hours Sync</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pricing & Cart Button -->
+                    <div class="pricing-container">
+                        <div class="price-wrapper">
+                            <span class="currency">$</span>
+                            <span id="product-price" class="price">299</span>
+                            <span class="cents">.00</span>
+                        </div>
+                        <button id="add-to-cart-main" class="btn btn-primary btn-glow">
+                            <i data-lucide="shopping-cart"></i> Add Customized to Cart
+                        </button>
+                    </div>
+                </div>
+                <!-- Column 2: 3D Canvas -->
+                <div class="panel canvas-container glass">
+                    <div id="canvas-3d-target"></div>
+                    
+                    <!-- Canvas Controls -->
+                    <div class="canvas-controls">
+                        <button id="btn-reset-cam" class="glass-control-btn" title="Reset View">
+                            <i data-lucide="maximize-2"></i>
+                        </button>
+                        <button id="btn-auto-rotate" class="glass-control-btn active" title="Toggle Rotation">
+                            <i data-lucide="rotate-cw"></i>
+                        </button>
+                    </div>
+                    <div class="canvas-hint">
+                        <i data-lucide="move"></i> Drag to rotate / Pinch or Scroll to zoom
+                    </div>
+                </div>
+                <!-- Column 3: Customizer Controls -->
+                <div class="panel customizer-controls glass animate-fade-in-right">
+                    <h2 class="section-subtitle">Customize Spec</h2>
+                    <p class="section-desc">Tailor materials and lighting core to your setup.</p>
+                    
+                    <div class="customizer-group">
+                        <div class="group-header">
+                            <span class="group-title">Body Finish</span>
+                            <span id="selected-finish" class="selected-value">Metallic Pro</span>
+                        </div>
+                        <div class="finish-selector">
+                            <button class="finish-btn active" data-finish="metallic" data-price-add="0">
+                                <span class="finish-preview metallic-preview"></span>
+                                Metallic
+                            </button>
+                            <button class="finish-btn" data-finish="matte" data-price-add="-15">
+                                <span class="finish-preview matte-preview"></span>
+                                Matte
+                            </button>
+                            <button class="finish-btn" data-finish="cyberpunk" data-price-add="25">
+                                <span class="finish-preview cyberpunk-preview"></span>
+                                Carbon
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Color customization loops -->
+                    <div class="customizer-group">
+                        <div class="group-header">
+                            <span class="group-title">Earcup Color</span>
+                            <span id="selected-earcup" class="selected-value">Cyber Silver</span>
+                        </div>
+                        <div class="color-swatches" id="earcup-swatches"></div>
+                    </div>
+                    <div class="customizer-group">
+                        <div class="group-header">
+                            <span class="group-title">Headband Grip</span>
+                            <span id="selected-headband" class="selected-value">Carbon Black</span>
+                        </div>
+                        <div class="color-swatches" id="headband-swatches"></div>
+                    </div>
+                    <div class="customizer-group">
+                        <div class="group-header">
+                            <span class="group-title">LED Pulse Core</span>
+                            <span id="selected-led" class="selected-value">Neon Cyan</span>
+                        </div>
+                        <div class="color-swatches" id="led-swatches"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Specifications Section -->
+        <section id="specs-section" class="section specs-section glass-section">
+            <div class="section-header text-center">
+                <h2 class="section-title">Quantum Specs</h2>
+                <p class="section-subtitle-text">Engineered for pure biometric integration.</p>
+            </div>
+            
+            <div class="specs-grid">
+                <div class="spec-card glass">
+                    <div class="spec-icon-wrapper earcup-glow">
+                        <i data-lucide="radio"></i>
+                    </div>
+                    <h3>Graphene Drivers</h3>
+                    <p>Dual 50mm dynamic drivers coated with acoustic graphene sheets deliver crisp trebles and deep tactile sub-bass.</p>
+                </div>
+                <div class="spec-card glass">
+                    <div class="spec-icon-wrapper headband-glow">
+                        <i data-lucide="eye-off"></i>
+                    </div>
+                    <h3>Adaptive ANC</h3>
+                    <p>Real-time neural noise cancelling analyzes external sound fields 48,000 times per second to create a pure void of sound.</p>
+                </div>
+                <div class="spec-card glass">
+                    <div class="spec-icon-wrapper led-glow">
+                        <i data-lucide="waves"></i>
+                    </div>
+                    <h3>Biometric Sync</h3>
+                    <p>Integrates with wearable telemetry to adjust the sound signature based on your heart rate, stress levels, and focus.</p>
+                </div>
+                <div class="spec-card glass">
+                    <div class="spec-icon-wrapper">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3>A1 Neural Chip</h3>
+                    <p>An on-board ultra-efficient neural processing unit optimizes audio spatialization and minimizes wireless audio compression.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Products/Accessories Catalog Section -->
+        <section id="catalog-section" class="section catalog-section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Gear & Accessories</h2>
+                    <p class="section-subtitle-text">Enhance your auditory rig with custom hardware.</p>
+                </div>
+            </div>
+            <div class="catalog-grid" id="accessories-catalog"></div>
+        </section>
+    </main>
+    <!-- Shopping Cart Sidebar Drawer -->
+    <div id="cart-overlay" class="cart-overlay-container">
+        <div class="cart-panel glass">
+            <div class="cart-header">
+                <h2>Your Audio Rig</h2>
+                <button id="close-cart-btn" class="icon-btn close-btn" aria-label="Close Shopping Cart">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="cart-items-container" id="cart-items-list"></div>
+            <div class="cart-summary">
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="summary-line">
+                    <span>Security & Shipping</span>
+                    <span class="accent-color">FREE</span>
+                </div>
+                <div class="summary-line total-line">
+                    <span>Total Est.</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+                <button id="checkout-btn" class="btn btn-primary btn-block btn-glow">
+                    Secure Checkout <i data-lucide="shield-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="checkout-modal-container">
+        <div class="checkout-box glass">
+            <button id="close-checkout-btn" class="icon-btn close-btn" aria-label="Close Checkout">
+                <i data-lucide="x"></i>
+            </button>
+            
+            <div class="checkout-grid">
+                <!-- Left: Form -->
+                <div class="checkout-form-panel">
+                    <h2>Rig Registration & Shipping</h2>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label for="checkout-name">Full Name</label>
+                            <input type="text" id="checkout-name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout-email">Cyber Address (Email)</label>
+                            <input type="email" id="checkout-email" required placeholder="johndoe@aether.net">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout-address">Delivery Terminal (Address)</label>
+                            <input type="text" id="checkout-address" required placeholder="1042 Neon Boulevard, Sector 7">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkout-city">City</label>
+                                <input type="text" id="checkout-city" required placeholder="Neo-Tokyo">
+                            </div>
+                            <div class="form-group">
+                                <label for="checkout-zip">Zip</label>
+                                <input type="text" id="checkout-zip" required placeholder="8092-A">
+                            </div>
+                        </div>
+                        <h3 class="form-subtitle">Secure Credential Sync</h3>
+                        <div class="form-group">
+                            <label for="card-num">Card Number</label>
+                            <input type="text" id="card-num" required maxlength="19" placeholder="4242 4242 4242 4242">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-expiry">Expiry</label>
+                                <input type="text" id="card-expiry" required maxlength="5" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-cvc">Security Key</label>
+                                <input type="text" id="card-cvc" required maxlength="3" placeholder="***">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-glow submit-btn">
+                            Complete Order & Sync
+                        </button>
+                    </form>
+                </div>
+                <!-- Right: Visual Card Preview & Summary -->
+                <div class="checkout-preview-panel">
+                    <div class="credit-card-wrapper">
+                        <div class="credit-card glass-card">
+                            <div class="card-chip"></div>
+                            <div class="card-logo">AETHER CORE</div>
+                            <div class="card-number-display" id="card-number-preview">•••• •••• •••• ••••</div>
+                            <div class="card-bottom">
+                                <div class="card-holder">
+                                    <div class="card-label">CARDHOLDER</div>
+                                    <div class="card-value-display" id="card-name-preview">YOUR NAME</div>
+                                </div>
+                                <div class="card-expiry-info">
+                                    <div class="card-label">EXPIRES</div>
+                                    <div class="card-value-display" id="card-expiry-preview">MM/YY</div>
+                                </div>
+                            </div>
+                            <div class="card-glow"></div>
+                        </div>
+                    </div>
+                    <div class="checkout-order-summary">
+                        <h3>Order Summary</h3>
+                        <div id="checkout-summary-list" class="summary-items"></div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-total-line">
+                            <span>Final Total</span>
+                            <span id="checkout-summary-total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Success Modal -->
+    <div id="success-modal" class="success-modal-container">
+        <div class="success-box glass text-center">
+            <div class="success-icon-wrapper">
+                <i data-lucide="check-circle" class="success-check-icon"></i>
+            </div>
+            <h2>Neural Uplink Successful</h2>
+            <p>Your custom Aether rig has been registered and scheduled for fast orbital drop delivery.</p>
+            
+            <div class="receipt-box glass">
+                <div class="receipt-row">
+                    <span class="label">Order Reference</span>
+                    <span class="value code-font" id="receipt-ref">ATH-9082-9X</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="label">Delivery Node</span>
+                    <span class="value" id="receipt-node">Neo-Tokyo Sector 7</span>
+                </div>
+                <div class="receipt-row total-receipt-row">
+                    <span class="label">Authorized Charge</span>
+                    <span class="value" id="receipt-total">$299.00</span>
+                </div>
+            </div>
+            <button id="success-close-btn" class="btn btn-primary btn-glow">
+                Return to Network
+            </button>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <p>&copy; 2026 AETHER Audio Inc. // Developed by: <span class="system-status-ok">Arun Kumar</span></p>
+    </footer>
+    <!-- Three.js logic and Orchestrator script -->
+    <script type="module">
+        import * as THREE from 'https://esm.sh/three@0.147.0';
+        import { OrbitControls } from 'https://esm.sh/three@0.147.0/examples/jsm/controls/OrbitControls.js';
+        // ==========================================================================
+        // 3D RENDER ENGINE (ThreeViewer)
+        // ==========================================================================
+        class ThreeViewer {
+            constructor(containerId) {
+                this.container = document.getElementById(containerId);
+                if (!this.container) {
+                    console.error(`Container #${containerId} not found.`);
+                    return;
+                }
+                this.width = this.container.clientWidth;
+                this.height = this.container.clientHeight || 500;
+                this.autoRotate = true;
+                this.isLoaded = false;
+                
+                this.materials = {};
+                
+                this.init();
+            }
+            init() {
+                this.scene = new THREE.Scene();
+                this.scene.fog = new THREE.FogExp2(0x080a0f, 0.05);
+                this.camera = new THREE.PerspectiveCamera(40, this.width / this.height, 0.1, 100);
+                this.camera.position.set(0, 0, 12);
+                this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                this.renderer.setSize(this.width, this.height);
+                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                this.renderer.shadowMap.enabled = true;
+                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                this.renderer.toneMappingExposure = 1.0;
+                this.container.appendChild(this.renderer.domElement);
+                this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+                this.controls.dampingFactor = 0.05;
+                this.controls.maxDistance = 20;
+                this.controls.minDistance = 5;
+                this.controls.enablePan = false;
+                this.setupLights();
+                this.createParticles();
+                this.buildHeadset();
+                window.addEventListener('resize', this.onResize.bind(this));
+                this.animate();
+                this.isLoaded = true;
+            }
+            setupLights() {
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+                this.scene.add(ambientLight);
+                this.keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
+                this.keyLight.position.set(5, 8, 5);
+                this.keyLight.castShadow = true;
+                this.scene.add(this.keyLight);
+                this.fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                this.fillLight.position.set(-5, 3, -5);
+                this.scene.add(this.fillLight);
+                this.backLight = new THREE.DirectionalLight(0xbd00ff, 1.2);
+                this.backLight.position.set(0, -6, 2);
+                this.scene.add(this.backLight);
+                this.leftLedLight = new THREE.PointLight(0x00f0ff, 2.5, 6, 2);
+                this.leftLedLight.position.set(-2.5, -0.5, 0);
+                this.scene.add(this.leftLedLight);
+                this.rightLedLight = new THREE.PointLight(0x00f0ff, 2.5, 6, 2);
+                this.rightLedLight.position.set(2.5, -0.5, 0);
+                this.scene.add(this.rightLedLight);
+            }
+            createParticles() {
+                const particleCount = 200;
+                const geometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(particleCount * 3);
+                for (let i = 0; i < particleCount * 3; i += 3) {
+                    positions[i] = (Math.random() - 0.5) * 20;
+                    positions[i + 1] = (Math.random() - 0.5) * 15;
+                    positions[i + 2] = (Math.random() - 0.5) * 15;
+                }
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                const material = new THREE.PointsMaterial({
+                    color: 0x00f0ff,
+                    size: 0.08,
+                    transparent: true,
+                    opacity: 0.6,
+                    blending: THREE.AdditiveBlending
+                });
+                this.particles = new THREE.Points(geometry, material);
+                this.scene.add(this.particles);
+            }
+            buildHeadset() {
+                this.headsetGroup = new THREE.Group();
+                this.scene.add(this.headsetGroup);
+                this.materials.headband = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.6, metalness: 0.2 });
+                this.materials.headbandCushion = new THREE.MeshStandardMaterial({ color: 0x27272a, roughness: 0.8, metalness: 0.1 });
+                this.materials.earcups = new THREE.MeshStandardMaterial({ color: 0xd4d4d8, roughness: 0.15, metalness: 0.95 });
+                this.materials.cushions = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.9, metalness: 0.05 });
+                this.materials.accents = new THREE.MeshStandardMaterial({ color: 0x000000, roughness: 0.4, metalness: 0.8 });
+                
+                this.materials.led = new THREE.MeshStandardMaterial({
+                    color: 0x000000,
+                    emissive: 0x00f0ff,
+                    emissiveIntensity: 3.5,
+                    roughness: 0.2
+                });
+                // Headband
+                const headbandGeo = new THREE.TorusGeometry(2.6, 0.24, 16, 64, Math.PI);
+                const headbandMesh = new THREE.Mesh(headbandGeo, this.materials.headband);
+                headbandMesh.rotation.z = -Math.PI / 2;
+                headbandMesh.position.y = 0.8;
+                headbandMesh.castShadow = true;
+                this.headsetGroup.add(headbandMesh);
+                // Cushion
+                const cushionGeo = new THREE.TorusGeometry(2.45, 0.14, 12, 64, Math.PI);
+                const cushionMesh = new THREE.Mesh(cushionGeo, this.materials.headbandCushion);
+                cushionMesh.rotation.z = -Math.PI / 2;
+                cushionMesh.position.y = 0.8;
+                this.headsetGroup.add(cushionMesh);
+                // Joints
+                const jointGeo = new THREE.CylinderGeometry(0.14, 0.14, 1.2, 16);
+                const leftJoint = new THREE.Mesh(jointGeo, this.materials.accents);
+                leftJoint.position.set(-2.6, 0.2, 0);
+                leftJoint.rotation.z = 0.1;
+                this.headsetGroup.add(leftJoint);
+                const rightJoint = leftJoint.clone();
+                rightJoint.position.x = 2.6;
+                rightJoint.rotation.z = -0.1;
+                this.headsetGroup.add(rightJoint);
+                // Earcups
+                const earcupGeo = new THREE.CylinderGeometry(1.15, 1.15, 0.7, 32);
+                earcupGeo.rotateZ(Math.PI / 2);
+                
+                this.leftEarcup = new THREE.Mesh(earcupGeo, this.materials.earcups);
+                this.leftEarcup.position.set(-2.75, -0.5, 0);
+                this.leftEarcup.castShadow = true;
+                this.headsetGroup.add(this.leftEarcup);
+                this.rightEarcup = new THREE.Mesh(earcupGeo, this.materials.earcups);
+                this.rightEarcup.position.set(2.75, -0.5, 0);
+                this.rightEarcup.castShadow = true;
+                this.headsetGroup.add(this.rightEarcup);
+                // Cushion pads
+                const padGeo = new THREE.CylinderGeometry(1.2, 1.2, 0.35, 32);
+                padGeo.rotateZ(Math.PI / 2);
+                const leftPad = new THREE.Mesh(padGeo, this.materials.cushions);
+                leftPad.position.set(-2.4, -0.5, 0);
+                this.headsetGroup.add(leftPad);
+                const rightPad = new THREE.Mesh(padGeo, this.materials.cushions);
+                rightPad.position.set(2.4, -0.5, 0);
+                this.headsetGroup.add(rightPad);
+                // Glowing LEDs
+                const ledRingGeo = new THREE.TorusGeometry(0.85, 0.06, 16, 64);
+                ledRingGeo.rotateY(Math.PI / 2);
+                this.leftLedRing = new THREE.Mesh(ledRingGeo, this.materials.led);
+                this.leftLedRing.position.set(-3.12, -0.5, 0);
+                this.headsetGroup.add(this.leftLedRing);
+                this.rightLedRing = new THREE.Mesh(ledRingGeo, this.materials.led);
+                this.rightLedRing.position.set(3.12, -0.5, 0);
+                this.headsetGroup.add(this.rightLedRing);
+                // Caps
+                const capGeo = new THREE.CylinderGeometry(0.6, 0.6, 0.1, 32);
+                capGeo.rotateZ(Math.PI / 2);
+                const leftCap = new THREE.Mesh(capGeo, this.materials.accents);
+                leftCap.position.set(-3.14, -0.5, 0);
+                this.headsetGroup.add(leftCap);
+                const rightCap = new THREE.Mesh(capGeo, this.materials.accents);
+                rightCap.position.set(3.14, -0.5, 0);
+                this.headsetGroup.add(rightCap);
+                this.headsetGroup.rotation.x = 0.15;
+                this.headsetGroup.rotation.y = -0.3;
+            }
+            updateModelParts(config) {
+                if (!this.isLoaded) return;
+                const { finish, earcupColor, headbandColor, ledColor } = config;
+                if (finish === 'metallic') {
+                    this.materials.earcups.metalness = 0.95;
+                    this.materials.earcups.roughness = 0.15;
+                    this.materials.accents.metalness = 0.8;
+                    this.materials.accents.roughness = 0.3;
+                } else if (finish === 'matte') {
+                    this.materials.earcups.metalness = 0.1;
+                    this.materials.earcups.roughness = 0.75;
+                    this.materials.accents.metalness = 0.05;
+                    this.materials.accents.roughness = 0.6;
+                } else if (finish === 'cyberpunk') {
+                    this.materials.earcups.metalness = 0.75;
+                    this.materials.earcups.roughness = 0.3;
+                    this.materials.accents.metalness = 0.9;
+                    this.materials.accents.roughness = 0.05;
+                }
+                if (earcupColor) {
+                    this.materials.earcups.color.setHex(parseInt(earcupColor.replace('#', '0x')));
+                }
+                if (headbandColor) {
+                    this.materials.headband.color.setHex(parseInt(headbandColor.replace('#', '0x')));
+                    this.materials.headbandCushion.color.setHex(parseInt(headbandColor.replace('#', '0x')));
+                    this.materials.headbandCushion.color.multiplyScalar(0.7);
+                }
+                if (ledColor) {
+                    const hexVal = parseInt(ledColor.replace('#', '0x'));
+                    this.materials.led.emissive.setHex(hexVal);
+                    this.leftLedLight.color.setHex(hexVal);
+                    this.rightLedLight.color.setHex(hexVal);
+                    this.backLight.color.setHex(hexVal);
+                    this.particles.material.color.setHex(hexVal);
+                }
+            }
+            resetCamera() {
+                this.camera.position.set(0, 0, 12);
+                this.controls.target.set(0, 0, 0);
+                this.headsetGroup.rotation.set(0.15, -0.3, 0);
+            }
+            animate() {
+                requestAnimationFrame(this.animate.bind(this));
+                if (this.autoRotate) {
+                    this.headsetGroup.rotation.y += 0.006;
+                }
+                if (this.particles) {
+                    this.particles.rotation.y -= 0.001;
+                    this.particles.rotation.x += 0.0005;
+                }
+                this.controls.update();
+                this.renderer.render(this.scene, this.camera);
+            }
+            onResize() {
+                this.width = this.container.clientWidth;
+                this.height = this.container.clientHeight || 500;
+                this.camera.aspect = this.width / this.height;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(this.width, this.height);
+            }
+        }
+        // ==========================================================================
+        // APPLICATION CONTROLLER (App)
+        // ==========================================================================
+        const EARCUP_COLORS = [
+            { name: 'Cyber Silver', hex: '#d4d4d8' },
+            { name: 'Carbon Black', hex: '#18181b' },
+            { name: 'Phantom Red', hex: '#ef4444' },
+            { name: 'Cobalt Pulse', hex: '#3b82f6' },
+            { name: 'Sunset Gold', hex: '#f59e0b' }
+        ];
+        const HEADBAND_COLORS = [
+            { name: 'Stealth Black', hex: '#18181b' },
+            { name: 'Industrial Gray', hex: '#4b5563' },
+            { name: 'Crimson Leather', hex: '#991b1b' },
+            { name: 'Desert Sand', hex: '#d97706' },
+            { name: 'Ice White', hex: '#f9fafb' }
+        ];
+        const LED_COLORS = [
+            { name: 'Neon Cyan', hex: '#00f0ff' },
+            { name: 'Glowing Ruby', hex: '#ff0055' },
+            { name: 'Purple Pulse', hex: '#bd00ff' },
+            { name: 'Matrix Green', hex: '#00ff66' },
+            { name: 'Solar Amber', hex: '#ffaa00' }
+        ];
+        const ACCESSORIES = [
+            {
+                id: 'acc-case',
+                name: 'Carbon Shield Case',
+                desc: 'Crush-resistant outer shell with soft molded lining and accessory compartments.',
+                price: 39,
+                svg: `<svg viewBox="0 0 100 100" class="accessory-svg"><path d="M20,30 C20,20 30,15 50,15 C70,15 80,20 80,30 L80,70 C80,80 70,85 50,85 C30,85 20,80 20,70 Z" fill="none" stroke="var(--accent-active)" stroke-width="3"/><path d="M20,50 L80,50" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-dasharray="2,2"/><rect x="42" y="10" width="16" height="5" rx="2" fill="none" stroke="var(--accent-active)" stroke-width="2"/></svg>`
+            },
+            {
+                id: 'acc-stand',
+                name: 'Aether Charge Stand',
+                desc: 'Premium aluminum stand featuring magnetic contact induction and LED status.',
+                price: 49,
+                svg: `<svg viewBox="0 0 100 100" class="accessory-svg"><path d="M50,15 L50,75 M30,75 L70,75 M25,85 L75,85" fill="none" stroke="var(--accent-active)" stroke-width="4" stroke-linecap="round"/><path d="M42,20 Q50,12 58,20" fill="none" stroke="var(--accent-active)" stroke-width="3" stroke-linecap="round"/></svg>`
+            },
+            {
+                id: 'acc-padding',
+                name: 'Biometric Extra Cushions',
+                desc: 'Memory gel core replacement padding coated with breathable athletic fabric.',
+                price: 25,
+                svg: `<svg viewBox="0 0 100 100" class="accessory-svg"><circle cx="50" cy="50" r="28" fill="none" stroke="var(--accent-active)" stroke-width="6"/><circle cx="50" cy="50" r="16" fill="none" stroke="var(--accent-active)" stroke-width="2" stroke-dasharray="3,3"/></svg>`
+            },
+            {
+                id: 'acc-transmitter',
+                name: 'Orbital Link USB Key',
+                desc: 'Broadcom latency-free 2.4GHz transmitter for multi-channel sync.',
+                price: 59,
+                svg: `<svg viewBox="0 0 100 100" class="accessory-svg"><rect x="35" y="25" width="30" height="40" rx="3" fill="none" stroke="var(--accent-active)" stroke-width="3"/><rect x="42" y="65" width="16" height="15" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><circle cx="50" cy="45" r="5" fill="var(--accent-active)"/></svg>`
+            }
+        ];
+        class App {
+            constructor() {
+                this.viewer = null;
+                this.config = {
+                    finish: 'metallic',
+                    basePrice: 299,
+                    finishPriceAdd: 0,
+                    earcup: EARCUP_COLORS[0],
+                    headband: HEADBAND_COLORS[0],
+                    led: LED_COLORS[0]
+                };
+                this.cart = this.loadCartFromStorage();
+                this.init();
+            }
+            init() {
+                this.runLoader();
+                this.viewer = new ThreeViewer('canvas-3d-target');
+                this.update3DViewer();
+                this.renderSwatches('earcup-swatches', EARCUP_COLORS, 'earcup', this.config.earcup.hex);
+                this.renderSwatches('headband-swatches', HEADBAND_COLORS, 'headband', this.config.headband.hex);
+                this.renderSwatches('led-swatches', LED_COLORS, 'led', this.config.led.hex);
+                this.renderCatalog();
+                this.setupEventHandlers();
+                this.updatePriceDisplay();
+                this.updateCartUI();
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            }
+            runLoader() {
+                const loader = document.getElementById('loader');
+                const percentageText = loader.querySelector('.loader-percentage');
+                const statusText = loader.querySelector('.loader-status');
+                
+                const phases = [
+                    { limit: 25, msg: 'Calibrating Optic Matrix...' },
+                    { limit: 60, msg: 'Compiling GPU Shaders...' },
+                    { limit: 85, msg: 'Syncing Bluetooth Nodes...' },
+                    { limit: 100, msg: 'Neural Interface Active.' }
+                ];
+                let percentage = 0;
+                let phaseIndex = 0;
+                const interval = setInterval(() => {
+                    percentage += Math.floor(Math.random() * 4) + 1;
+                    if (percentage >= 100) {
+                        percentage = 100;
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            loader.style.opacity = '0';
+                            loader.style.pointerEvents = 'none';
+                        }, 400);
+                    }
+                    percentageText.textContent = `${percentage}%`;
+                    if (percentage >= phases[phaseIndex].limit && phaseIndex < phases.length - 1) {
+                        phaseIndex++;
+                        statusText.textContent = phases[phaseIndex].msg;
+                    }
+                }, 30);
+            }
+            renderSwatches(containerId, options, key, currentHex) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                container.innerHTML = '';
+                
+                options.forEach(opt => {
+                    const swatch = document.createElement('button');
+                    swatch.className = `swatch ${opt.hex === currentHex ? 'active' : ''}`;
+                    swatch.dataset.hex = opt.hex;
+                    swatch.dataset.name = opt.name;
+                    swatch.title = opt.name;
+                    swatch.style.setProperty('--accent-active', opt.hex);
+                    swatch.style.setProperty('--accent-active-glow', opt.hex + '60');
+                    const inner = document.createElement('span');
+                    inner.className = 'swatch-inner';
+                    inner.style.backgroundColor = opt.hex;
+                    
+                    if (key === 'led') {
+                        inner.style.boxShadow = `0 0 10px ${opt.hex}`;
+                    }
+                    swatch.appendChild(inner);
+                    swatch.addEventListener('click', () => {
+                        container.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+                        swatch.classList.add('active');
+                        this.config[key] = opt;
+                        const label = document.getElementById(`selected-${key}`);
+                        if (label) label.textContent = opt.name;
+                        this.update3DViewer();
+                    });
+                    container.appendChild(swatch);
+                });
+            }
+            renderCatalog() {
+                const catalogContainer = document.getElementById('accessories-catalog');
+                if (!catalogContainer) return;
+                catalogContainer.innerHTML = '';
+                ACCESSORIES.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'catalog-card glass';
+                    card.innerHTML = `
+                        <div class="card-img-wrapper">${item.svg}</div>
+                        <div class="card-body">
+                            <h3 class="card-title">${item.name}</h3>
+                            <p class="card-desc">${item.desc}</p>
+                            <div class="card-footer">
+                                <span class="card-price">$${item.price}.00</span>
+                                <button class="card-btn add-acc-btn" data-id="${item.id}">
+                                    <i data-lucide="plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    card.querySelector('.add-acc-btn').addEventListener('click', () => {
+                        this.addToCart(item.id, item.name, item.price, 'accessory');
+                    });
+                    catalogContainer.appendChild(card);
+                });
+            }
+            update3DViewer() {
+                if (!this.viewer) return;
+                this.viewer.updateModelParts({
+                    finish: this.config.finish,
+                    earcupColor: this.config.earcup.hex,
+                    headbandColor: this.config.headband.hex,
+                    ledColor: this.config.led.hex
+                });
+                document.documentElement.style.setProperty('--accent-active', this.config.led.hex);
+                document.documentElement.style.setProperty('--accent-active-glow', this.config.led.hex + '55');
+            }
+            updatePriceDisplay() {
+                const priceElement = document.getElementById('product-price');
+                if (!priceElement) return;
+                const finalPrice = this.config.basePrice + this.config.finishPriceAdd;
+                priceElement.textContent = finalPrice;
+            }
+            loadCartFromStorage() {
+                const saved = localStorage.getItem('aether_audio_cart_aether');
+                return saved ? JSON.parse(saved) : [];
+            }
+            saveCartToStorage() {
+                localStorage.setItem('aether_audio_cart_aether', JSON.stringify(this.cart));
+            }
+            addToCart(id, name, price, type) {
+                let uniqueKey = id;
+                if (type === 'custom') {
+                    uniqueKey = `${id}-${this.config.finish}-${this.config.earcup.name.replace(' ', '')}-${this.config.headband.name.replace(' ', '')}-${this.config.led.name.replace(' ', '')}`;
+                }
+                const existingItem = this.cart.find(item => item.key === uniqueKey);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    const newItem = {
+                        key: uniqueKey,
+                        id: id,
+                        name: name,
+                        price: price,
+                        type: type,
+                        quantity: 1,
+                        details: type === 'custom' ? {
+                            finish: this.config.finish,
+                            earcup: this.config.earcup.name,
+                            headband: this.config.headband.name,
+                            led: this.config.led.name,
+                            ledHex: this.config.led.hex
+                        } : null
+                    };
+                    this.cart.push(newItem);
+                }
+                this.saveCartToStorage();
+                this.updateCartUI();
+                this.openCart();
+            }
+            changeQuantity(key, delta) {
+                const item = this.cart.find(i => i.key === key);
+                if (!item) return;
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    this.cart = this.cart.filter(i => i.key !== key);
+                }
+                this.saveCartToStorage();
+                this.updateCartUI();
+            }
+            removeItem(key) {
+                this.cart = this.cart.filter(i => i.key !== key);
+                this.saveCartToStorage();
+                this.updateCartUI();
+            }
+            clearCart() {
+                this.cart = [];
+                this.saveCartToStorage();
+                this.updateCartUI();
+            }
+            updateCartUI() {
+                const totalItemsCount = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+                document.querySelectorAll('.cart-count').forEach(el => {
+                    el.textContent = totalItemsCount;
+                });
+                const list = document.getElementById('cart-items-list');
+                if (!list) return;
+                if (this.cart.length === 0) {
+                    list.innerHTML = `
+                        <div class="empty-cart-message">
+                            <i data-lucide="shopping-bag"></i>
+                            <p>Your audio rig is empty.</p>
+                        </div>
+                    `;
+                } else {
+                    list.innerHTML = '';
+                    this.cart.forEach(item => {
+                        const itemEl = document.createElement('div');
+                        itemEl.className = 'cart-item';
+                        let imgMarkup = '';
+                        if (item.type === 'custom') {
+                            imgMarkup = `
+                                <div class="cart-item-img" style="border-color: ${item.details.ledHex}">
+                                    <span class="logo-icon" style="color: ${item.details.ledHex}">▲</span>
+                                </div>
+                            `;
+                        } else {
+                            const accessoryItem = ACCESSORIES.find(a => a.id === item.id);
+                            imgMarkup = `<div class="cart-item-img">${accessoryItem ? accessoryItem.svg : ''}</div>`;
+                        }
+                        let specsMarkup = item.type === 'custom' 
+                            ? `<span class="cart-item-specs">${item.details.finish} // ${item.details.earcup} // LED: ${item.details.led}</span>`
+                            : `<span class="cart-item-specs">Hardware Upgrade</span>`;
+                        itemEl.innerHTML = `
+                            ${imgMarkup}
+                            <div class="cart-item-details">
+                                <h4 class="cart-item-name">${item.name}</h4>
+                                ${specsMarkup}
+                                <span class="cart-item-price">$${item.price * item.quantity}.00</span>
+                            </div>
+                            <div class="cart-item-actions">
+                                <div class="qty-control">
+                                    <button class="qty-btn qty-minus" data-key="${item.key}">-</button>
+                                    <span class="qty-val">${item.quantity}</span>
+                                    <button class="qty-btn qty-plus" data-key="${item.key}">+</button>
+                                </div>
+                                <button class="item-delete-btn" data-key="${item.key}"><i data-lucide="trash-2"></i> Remove</button>
+                            </div>
+                        `;
+                        itemEl.querySelector('.qty-minus').addEventListener('click', () => this.changeQuantity(item.key, -1));
+                        itemEl.querySelector('.qty-plus').addEventListener('click', () => this.changeQuantity(item.key, 1));
+                        itemEl.querySelector('.item-delete-btn').addEventListener('click', () => this.removeItem(item.key));
+                        list.appendChild(itemEl);
+                    });
+                }
+                const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                document.getElementById('cart-total').textContent = `$${subtotal.toFixed(2)}`;
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            }
+            openCart() {
+                document.getElementById('cart-overlay').classList.add('open');
+            }
+            closeCart() {
+                document.getElementById('cart-overlay').classList.remove('open');
+            }
+            openCheckout() {
+                if (this.cart.length === 0) return;
+                this.closeCart();
+                document.getElementById('checkout-modal').classList.add('open');
+                const summaryList = document.getElementById('checkout-summary-list');
+                summaryList.innerHTML = '';
+                this.cart.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'summary-item-line';
+                    row.innerHTML = `
+                        <span>${item.name} (x${item.quantity})</span>
+                        <span>$${item.price * item.quantity}.00</span>
+                    `;
+                    summaryList.appendChild(row);
+                });
+                const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                document.getElementById('checkout-summary-total').textContent = `$${subtotal.toFixed(2)}`;
+            }
+            closeCheckout() {
+                document.getElementById('checkout-modal').classList.remove('open');
+            }
+            setupEventHandlers() {
+                document.getElementById('cart-btn').addEventListener('click', () => this.openCart());
+                document.getElementById('close-cart-btn').addEventListener('click', () => this.closeCart());
+                document.getElementById('cart-overlay').addEventListener('click', (e) => {
+                    if (e.target === document.getElementById('cart-overlay')) this.closeCart();
+                });
+                document.getElementById('add-to-cart-main').addEventListener('click', () => {
+                    const finalPrice = this.config.basePrice + this.config.finishPriceAdd;
+                    this.addToCart('headset-vr1', 'Aether VR-1 Custom', finalPrice, 'custom');
+                });
+                document.getElementById('btn-reset-cam').addEventListener('click', () => {
+                    if (this.viewer) this.viewer.resetCamera();
+                });  const autoRotateBtn = document.getElementById('btn-auto-rotate');
+                autoRotateBtn.addEventListener('click', () => {
+                    if (this.viewer) {
+                        this.viewer.autoRotate = !this.viewer.autoRotate;
+                        autoRotateBtn.classList.toggle('active', this.viewer.autoRotate);
+                    }
+                });
+                document.querySelectorAll('.finish-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.finish-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.config.finish = btn.dataset.finish;
+                        this.config.finishPriceAdd = parseInt(btn.dataset.priceAdd || 0);
+                        const finishLabelMap = {
+                            metallic: 'Metallic Pro',
+                            matte: 'Matte Stealth',
+                            cyberpunk: 'Carbon Grid'
+                        };
+                        document.getElementById('selected-finish').textContent = finishLabelMap[this.config.finish] || this.config.finish;
+                        this.updatePriceDisplay();
+                        this.update3DViewer();
+                    });
+                });
+                document.getElementById('checkout-btn').addEventListener('click', () => this.openCheckout());
+                document.getElementById('close-checkout-btn').addEventListener('click', () => this.closeCheckout());
+                // card input sync
+                const cardNumInput = document.getElementById('card-num');
+                const cardExpiryInput = document.getElementById('card-expiry');
+                const cardNameInput = document.getElementById('checkout-name');
+                cardNumInput.addEventListener('input', (e) => {
+                    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                    let formattedValue = '';
+                    for (let i = 0; i < value.length; i++) {
+                        if (i > 0 && i % 4 === 0) formattedValue += ' ';
+                        formattedValue += value[i];
+                    }
+                    e.target.value = formattedValue;
+                    document.getElementById('card-number-preview').textContent = formattedValue || '•••• •••• •••• ••••';
+                });
+                cardExpiryInput.addEventListener('input', (e) => {
+                    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                    if (value.length > 2) {
+                        value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                    }
+                    e.target.value = value;
+                    document.getElementById('card-number-preview').textContent = value || 'MM/YY';
+                });
+                cardNameInput.addEventListener('input', (e) => {
+                    document.getElementById('card-name-preview').textContent = e.target.value.toUpperCase() || 'YOUR NAME';
+                });
+                const checkoutForm = document.getElementById('checkout-form');
+                checkoutForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const submitBtn = checkoutForm.querySelector('.submit-btn');
+                    const origText = submitBtn.innerHTML;
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = `<i data-lucide="loader" class="animate-spin"></i> Synchronizing Credentials...`;
+                    if (window.lucide) window.lucide.createIcons();
+                    setTimeout(() => {
+                        const orderId = `ATH-${Math.floor(Math.random() * 90000) + 10000}-${String.fromCharCode(65 + Math.floor(Math.random()*26))}${String.fromCharCode(65 + Math.floor(Math.random()*26))}`;
+                        const cityVal = document.getElementById('checkout-city').value;
+                        const totalVal = document.getElementById('checkout-summary-total').textContent;
+                        document.getElementById('receipt-ref').textContent = orderId;
+                        document.getElementById('receipt-node').textContent = cityVal || 'Global Delivery Grid';
+                        document.getElementById('receipt-total').textContent = totalVal;
+                        this.closeCheckout();
+                        this.clearCart();
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = origText;
+                        checkoutForm.reset();
+                        document.getElementById('success-modal').classList.add('open');
+                    }, 2000);
+                });
+                document.getElementById('success-close-btn').addEventListener('click', () => {
+                    document.getElementById('success-modal').classList.remove('open');
+                });
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                    });
+                });
+            }
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            new App();
+        });
+    </script>
+</body>
+</html>
